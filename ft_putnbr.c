@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printstr.c                                      :+:      :+:    :+:   */
+/*   ft_printnbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moatieh <moatieh@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/15 07:33:17 by moatieh           #+#    #+#             */
-/*   Updated: 2025/09/15 07:33:17 by moatieh          ###   ########.fr       */
+/*   Created: 2025/09/15 07:38:15 by moatieh           #+#    #+#             */
+/*   Updated: 2025/09/15 07:38:15 by moatieh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void printstr(char *s)
-{
-    int i;
+#include "libftprintf.h"
 
-    i = 0
-    while (s[i])
-    {
-        write(1, s[i], 1);
-        i++;
-    }
-    s[i] = '\0';
+int	ft_putnbr(int n)
+{
+	int	counter;
+
+	counter = 0;
+	if (n == -2147483648)
+	{
+		counter += write(1, "-2147483648", 11);
+		return counter;
+	}
+	if (n < 0)
+	{
+		counter += ft_putchar('-');
+		n = n * -1;
+	}
+	if (n > 9)
+	{
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
+	}
+	if (n <= 9 && n >= 0)
+	{
+		counter += ft_putchar(n + '0');
+	}
+	return counter;
 }

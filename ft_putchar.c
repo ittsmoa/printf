@@ -10,7 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putchar(char c)
+#include "libftprintf.h"
+
+int	ft_putchar(char c)
 {
-	write(1, &c, 1);
+	int	counter;
+
+	counter = write(1, &c, 1);
+	return counter;
 }
