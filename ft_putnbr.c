@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printnbr.c                                      :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moatieh <moatieh@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 07:38:15 by moatieh           #+#    #+#             */
-/*   Updated: 2025/09/15 07:38:15 by moatieh          ###   ########.fr       */
+/*   Updated: 2025/09/19 05:03:52 by moatieh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_putnbr(int n)
 {
-	int	counter;
+	int		counter;
+	long	long_n;
 
+	long_n = n;
 	counter = 0;
-	if (n == -2147483648)
-	{
-		counter += write(1, "-2147483648", 11);
-		return counter;
-	}
 	if (n < 0)
 	{
 		counter += ft_putchar('-');
-		n = n * -1;
+		long_n = long_n * -1;
 	}
-	if (n > 9)
+	if (long_n > 9)
 	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
+		counter += ft_putnbr(long_n / 10);
+		counter += ft_putnbr(long_n % 10);
 	}
-	if (n <= 9 && n >= 0)
+	if (long_n <= 9 && long_n >= 0)
 	{
-		counter += ft_putchar(n + '0');
+		counter += ft_putchar(long_n + '0');
 	}
-	return counter;
+	return (counter);
 }
